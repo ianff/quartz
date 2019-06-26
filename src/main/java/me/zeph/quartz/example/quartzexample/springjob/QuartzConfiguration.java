@@ -1,15 +1,14 @@
 package me.zeph.quartz.example.quartzexample.springjob;
 
 import org.quartz.JobDetail;
-import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
 @Configuration
@@ -28,7 +27,7 @@ public class QuartzConfiguration {
   @Bean
   public JobDetailFactoryBean jobDetail() {
     JobDetailFactoryBean jobDetailFactoryBean = new JobDetailFactoryBean();
-    jobDetailFactoryBean.setJobClass(CreateDeliveryJob.class);
+    jobDetailFactoryBean.setJobClass(CreateCustomerJob.class);
     jobDetailFactoryBean.setDurability(true);
     return jobDetailFactoryBean;
   }
@@ -43,12 +42,11 @@ public class QuartzConfiguration {
   }
 
   @Bean
-  public SimpleTriggerFactoryBean trigger(JobDetail jobDetail){
-    SimpleTriggerFactoryBean simpleTriggerFactoryBean = new SimpleTriggerFactoryBean();
-    simpleTriggerFactoryBean.setJobDetail(jobDetail);
-    simpleTriggerFactoryBean.setRepeatInterval(30000);
-    simpleTriggerFactoryBean.setRepeatCount(SimpleTrigger.REPEAT_INDEFINITELY);
-    return simpleTriggerFactoryBean;
+  public CronTriggerFactoryBean trigger(JobDetail jobDetail) {
+    CronTriggerFactoryBean cronTriggerFactoryBean = new CronTriggerFactoryBean();
+    cronTriggerFactoryBean.setJobDetail(jobDetail);
+    cronTriggerFactoryBean.setCronExpression("0 0,5,10,15,20,25,30,35,40,45,50,55 * * * ?");
+    return cronTriggerFactoryBean;
   }
 
 }

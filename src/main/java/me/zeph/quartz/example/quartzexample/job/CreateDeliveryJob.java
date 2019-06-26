@@ -6,7 +6,7 @@ import org.quartz.JobExecutionException;
 
 import java.util.Date;
 
-public class CreateCustomerJob implements Job {
+public class CreateDeliveryJob implements Job {
 
   @Override
   public void execute(JobExecutionContext context) throws JobExecutionException {

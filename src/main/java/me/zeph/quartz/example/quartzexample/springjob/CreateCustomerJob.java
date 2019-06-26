@@ -6,14 +6,14 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CreateDeliveryJob extends QuartzJobBean {
+public class CreateCustomerJob extends QuartzJobBean {
 
   @Autowired
-  private CreateDeliveryService createDeliveryService;
+  private CreateCustomerService createCustomerService;
 
   @Override
   protected void executeInternal(JobExecutionContext context) {
-    createDeliveryService.createDelivery(context.getFireInstanceId());
+    createCustomerService.createDelivery(context.getFireInstanceId());
   }
 
 }

@@ -13,7 +13,7 @@ import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 @Component
-public class CreateCustomerTask implements ApplicationRunner {
+public class CreateDeliveryTask implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
@@ -24,7 +24,7 @@ public class CreateCustomerTask implements ApplicationRunner {
     scheduler.start();
 
     // define the job and tie it to our HelloJob class
-    JobDetail job = newJob(CreateCustomerJob.class)
+    JobDetail job = newJob(CreateDeliveryJob.class)
         .withIdentity("job1", "group1")
         .build();
 
@@ -33,7 +33,7 @@ public class CreateCustomerTask implements ApplicationRunner {
         .withIdentity("trigger1", "group1")
         .startNow()
         .withSchedule(simpleSchedule()
-            .withIntervalInSeconds(40)
+            .withIntervalInSeconds(30)
             .repeatForever())
         .build();
 
