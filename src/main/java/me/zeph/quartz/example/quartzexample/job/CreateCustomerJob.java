@@ -1,14 +1,15 @@
 package me.zeph.quartz.example.quartzexample.job;
 
+import org.quartz.Job;
 import org.quartz.JobExecutionContext;
-import org.springframework.scheduling.quartz.QuartzJobBean;
+import org.quartz.JobExecutionException;
 
 import java.util.Date;
 
-public class CreateCustomerJob extends QuartzJobBean {
+public class CreateCustomerJob implements Job {
 
   @Override
-  protected void executeInternal(JobExecutionContext context) {
+  public void execute(JobExecutionContext context) throws JobExecutionException {
     System.out.println("customer created " + context.getFireInstanceId() + " at " + new Date().toString());
   }
 }
