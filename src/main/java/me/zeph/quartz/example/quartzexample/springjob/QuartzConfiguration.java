@@ -1,6 +1,8 @@
 package me.zeph.quartz.example.quartzexample.springjob;
 
+import org.quartz.JobDetail;
 import org.quartz.SimpleTrigger;
+import org.quartz.Trigger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -32,19 +34,19 @@ public class QuartzConfiguration {
   }
 
   @Bean
-  public SchedulerFactoryBean scheduler() {
+  public SchedulerFactoryBean scheduler(JobDetail jobDetail, Trigger trigger) {
     SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
     schedulerFactoryBean.setJobFactory(springBeanJobFactory());
-    schedulerFactoryBean.setJobDetails(jobDetail().getObject());
-    schedulerFactoryBean.setTriggers(trigger().getObject());
+    schedulerFactoryBean.setJobDetails(jobDetail);
+    schedulerFactoryBean.setTriggers(trigger);
     return schedulerFactoryBean;
   }
 
   @Bean
-  public SimpleTriggerFactoryBean trigger(){
+  public SimpleTriggerFactoryBean trigger(JobDetail jobDetail){
     SimpleTriggerFactoryBean simpleTriggerFactoryBean = new SimpleTriggerFactoryBean();
-    simpleTriggerFactoryBean.setJobDetail(jobDetail().getObject());
-    simpleTriggerFactoryBean.setRepeatInterval(300000);
+    simpleTriggerFactoryBean.setJobDetail(jobDetail);
+    simpleTriggerFactoryBean.setRepeatInterval(30000);
     simpleTriggerFactoryBean.setRepeatCount(SimpleTrigger.REPEAT_INDEFINITELY);
     return simpleTriggerFactoryBean;
   }
