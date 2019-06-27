@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 @Service
-public class CreateCustomerService {
+public class MessageService {
 
   @Autowired
   private CustomerRepository customerRepository;
 
-  public void createDelivery(String id) {
+  public void send(String id) {
     int size = customerRepository.findAll().size();
     System.out.println("Find customer count " + size + " at " + new Date().toString());
   }

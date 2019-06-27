@@ -28,7 +28,7 @@ public class QuartzConfiguration {
   @Bean
   public JobDetailFactoryBean jobDetail() {
     JobDetailFactoryBean jobDetailFactoryBean = new JobDetailFactoryBean();
-    jobDetailFactoryBean.setJobClass(CreateCustomerJob.class);
+    jobDetailFactoryBean.setJobClass(SendMessageJob.class);
     jobDetailFactoryBean.setDurability(true);
     return jobDetailFactoryBean;
   }
