@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
@@ -35,6 +36,7 @@ public class QuartzConfiguration {
   @Bean
   public SchedulerFactoryBean scheduler(JobDetail jobDetail, Trigger trigger) {
     SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
+    schedulerFactoryBean.setConfigLocation(new ClassPathResource("quartz.properties"));
     schedulerFactoryBean.setJobFactory(springBeanJobFactory());
     schedulerFactoryBean.setJobDetails(jobDetail);
     schedulerFactoryBean.setTriggers(trigger);
